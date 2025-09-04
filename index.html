@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>&lt;dance&gt; Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background: #f4f7fc;
+      color: #333;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #111;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+      font-size: 24px;
+      color: #f8d210;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #ccc;
+      text-decoration: none;
+      margin: 15px 0;
+      transition: color 0.2s;
+    }
+
+    .sidebar a:hover {
+      color: #fff;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      color: #111;
+    }
+
+    .cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      flex: 1 1 200px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    .card p {
+      font-size: 24px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    /* Chart Placeholder */
+    #chart {
+      height: 300px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      padding: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+      }
+
+      .cards {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>&lt;dance&gt;</h2>
+    <a href="#">Dashboard</a>
+    <a href="#">Dancers</a>
+    <a href="#">Events</a>
+    <a href="#">Schedules</a>
+    <a href="#">Settings</a>
+  </div>
+
+  <div class="main">
+    <div class="header">
+      <h1>Welcome to Dance Dashboard</h1>
+      <button onclick="alert('Logging out...')">Logout</button>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Total Dancers</h3>
+        <p id="dancers-count">128</p>
+      </div>
+      <div class="card">
+        <h3>Upcoming Events</h3>
+        <p id="events-count">5</p>
+      </div>
+      <div class="card">
+        <h3>Studios</h3>
+        <p>12</p>
+      </div>
+    </div>
+
+    <div id="chart">
+      <canvas id="danceChart" width="400" height="200"></canvas>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Chart.js: Create a bar chart for event participation
+    const ctx = document.getElementById('danceChart').getContext('2d');
+    const danceChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Ballet', 'Hip-Hop', 'Salsa', 'Contemporary', 'Jazz'],
+        datasets: [{
+          label: 'Participants',
+          data: [45, 32, 28, 20, 16],
+          backgroundColor: [
+            '#f8d210',
+            '#ff6f61',
+            '#6a67ce',
+            '#4ecdc4',
+            '#ff9f1c'
+          ],
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Dance Style Popularity'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
